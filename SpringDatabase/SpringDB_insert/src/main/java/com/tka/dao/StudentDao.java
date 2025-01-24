@@ -1,0 +1,29 @@
+package com.tka.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.entity.Student;
+
+@Repository
+public class StudentDao {
+
+	@Autowired
+	SessionFactory sf;
+
+	public String insertData(Student s) {
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+
+		ss.persist(s);
+
+		tr.commit();
+		ss.close();
+
+		return "Data inserted successfully!!";
+	}
+
+}
